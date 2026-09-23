@@ -1,4 +1,4 @@
-# 📊 Dynamic Asset Allocation using Deep Reinforcement Learning
+#  Dynamic Asset Allocation using Deep Reinforcement Learning
 
 > A Deep Reinforcement Learning framework for dynamically allocating capital across multiple assets while balancing return and risk.
 
@@ -6,7 +6,7 @@
 ![DDPG](https://img.shields.io/badge/RL-DDPG-orange)
 ![Quant Finance](https://img.shields.io/badge/Domain-Quant%20Finance-green)
 
-## 📌 Overview
+##  Overview
 
 Traditional portfolio management often uses fixed weights or manually defined rebalancing rules. Financial markets are dynamic: returns, volatility, correlations, and risk change over time.
 
@@ -28,7 +28,7 @@ The action is converted into portfolio weights, and the resulting portfolio retu
 
 ---
 
-# 🎯 Problem Formulation
+#  Problem Formulation
 
 Assume the portfolio contains $N$ assets. The allocation vector at time $t$ is
 
@@ -56,7 +56,7 @@ where $\gamma$ is the discount factor and $r_t$ is the portfolio reward.
 
 ---
 
-# 🧠 1. Markov Decision Process
+#  1. Markov Decision Process
 
 Portfolio allocation can be represented as
 
@@ -82,7 +82,7 @@ The agent therefore learns a **sequence of portfolio decisions**, rather than si
 
 ---
 
-# 🔄 2. Complete Project Pipeline
+#  2. Complete Project Pipeline
 
 ```text
 User selects 3–10 assets
@@ -136,7 +136,7 @@ Custom Portfolio Environment
 
 ---
 
-# 📥 3. Asset Selection
+#  3. Asset Selection
 
 The project supports a user-defined portfolio of **3 to 10 assets** using ticker symbols compatible with `yfinance`.
 
@@ -156,7 +156,7 @@ The framework can be adapted to equities, ETFs, indices, crypto assets, or other
 
 ---
 
-# 📅 4. Historical Data
+#  4. Historical Data
 
 For asset $i$, let the closing-price series be
 
@@ -177,7 +177,7 @@ The workflow checks missing observations and aligns assets to a common usable da
 
 ---
 
-# 🧹 5. Data Cleaning and Common Date Range
+#  5. Data Cleaning and Common Date Range
 
 Different assets may have different listing dates, holidays, missing observations, or incomplete histories.
 
@@ -196,7 +196,7 @@ Before training, missing values should be handled so that NaNs do not propagate 
 
 ---
 
-# 📈 6. Return Calculation
+#  6. Return Calculation
 
 For a close-to-close simple return:
 
@@ -224,7 +224,7 @@ The return vector across all assets is
 
 ---
 
-# 📊 7. Mean Return and Volatility
+#  7. Mean Return and Volatility
 
 For asset $i$, historical mean return is
 
@@ -252,7 +252,7 @@ and the volatility vector is
 
 ---
 
-# 🔗 8. Covariance and Portfolio Risk
+#  8. Covariance and Portfolio Risk
 
 Let $\Sigma$ denote the covariance matrix:
 
@@ -276,7 +276,7 @@ This shows why diversification matters: portfolio risk depends on both individua
 
 ---
 
-# 📐 9. Min-Max Normalization
+#  9. Min-Max Normalization
 
 To put features on a comparable scale, Min-Max normalization can be used.
 
@@ -296,7 +296,7 @@ Therefore:
 
 ---
 
-# 🏦 10. Custom Portfolio Trading Environment
+#  10. Custom Portfolio Trading Environment
 
 The environment converts portfolio management into an RL problem.
 
@@ -318,7 +318,7 @@ The resulting transition is
 
 ---
 
-# 🧩 11. State Space
+#  11. State Space
 
 The state represents information available at decision time.
 
@@ -334,7 +334,7 @@ Using future prices, future returns, or future-derived statistics when construct
 
 ---
 
-# 🎮 12. Continuous Action Space
+#  12. Continuous Action Space
 
 The Actor produces a continuous action vector:
 
@@ -370,7 +370,7 @@ and
 
 ---
 
-# 💰 13. Portfolio Return
+#  13. Portfolio Return
 
 Once the allocation is selected, the next-period portfolio return is
 
@@ -404,7 +404,7 @@ CR=\frac{V_T}{V_0}-1
 
 ---
 
-# 🏆 14. Reward Function
+#  14. Reward Function
 
 A simple reward based only on return is
 
@@ -432,7 +432,7 @@ The reward should be consistent with the actual implementation used by the envir
 
 ---
 
-# 🧠 15. DDPG Architecture
+#  15. DDPG Architecture
 
 The project uses **Deep Deterministic Policy Gradient (DDPG)** for continuous portfolio allocation.
 
@@ -469,7 +469,7 @@ State s_t ──►│   Critic    │◄── Action a_t
 
 ---
 
-# 🎯 16. Actor Network
+#  16. Actor Network
 
 The Actor represents the deterministic policy:
 
@@ -489,7 +489,7 @@ Here $B$ is the mini-batch size.
 
 ---
 
-# 🧪 17. Critic Network
+#  17. Critic Network
 
 The Critic estimates the value of a state-action pair:
 
@@ -509,7 +509,7 @@ The Critic therefore answers:
 
 ---
 
-# 🔁 18. Bellman Target
+#  18. Bellman Target
 
 For a transition $(s_i,a_i,r_i,s_{i+1},d_i)$, the DDPG target is
 
@@ -531,7 +531,7 @@ L_{\mathrm{Critic}}(\phi)=\frac{1}{B}\sum_{i=1}^{B}\left(Q_\phi(s_i,a_i)-y_i\rig
 
 ---
 
-# 📉 19. Actor Loss
+#  19. Actor Loss
 
 The Actor attempts to maximize the Critic's estimated Q-value.
 
@@ -545,7 +545,7 @@ This is the equation that should be displayed as **Actor Loss**. `Sharpe`, `Crit
 
 ---
 
-# 💾 20. Experience Replay
+#  20. Experience Replay
 
 Transitions are stored in a replay buffer:
 
@@ -571,7 +571,7 @@ batch = replay_buffer.sample(batch_size)
 
 ---
 
-# 🎲 21. Exploration Noise
+#  21. Exploration Noise
 
 Because the DDPG Actor is deterministic, exploration noise is added during training:
 
@@ -589,7 +589,7 @@ The noise magnitude can be reduced during training so the agent gradually moves 
 
 ---
 
-# 🎯 22. Target Networks
+#  22. Target Networks
 
 DDPG uses slowly updated target networks.
 
@@ -611,7 +611,7 @@ These soft updates make the Bellman target more stable during training.
 
 ---
 
-# 🔄 23. Daily Dynamic Allocation
+#  23. Daily Dynamic Allocation
 
 The complete decision cycle is
 
@@ -643,7 +643,7 @@ The actual allocations are learned by the policy.
 
 ---
 
-# 🧪 24. Training and Testing
+#  24. Training and Testing
 
 The experiment should separate training and out-of-sample testing:
 
@@ -671,7 +671,7 @@ The test period must not be used to update the Actor or Critic.
 
 ---
 
-# 📏 25. Performance Metrics
+#  25. Performance Metrics
 
 ## Cumulative Return
 
@@ -735,7 +735,7 @@ MDD=\min_t DD_t
 
 ---
 
-# 📉 26. Nifty 50 Benchmark
+#  26. Nifty 50 Benchmark
 
 The strategy is compared with the **Nifty 50** to evaluate whether the learned portfolio provides attractive performance relative to a passive market benchmark.
 
@@ -761,7 +761,7 @@ Beta is calculated as
 
 ---
 
-# 📈 27. Reported Test Results
+#  27. Reported Test Results
 
 The current project reports the following results for the **August 2022 – March 2024** test period:
 
@@ -780,7 +780,7 @@ These figures are the reported historical test results of the project and should
 
 ---
 
-# 💡 28. Interpretation
+#  28. Interpretation
 
 ### Cumulative Return
 
@@ -808,7 +808,7 @@ A beta of **0.81** indicates lower linear sensitivity to Nifty 50 movements than
 
 ---
 
-# ⚠️ 29. Quantitative Finance Considerations
+#  29. Quantitative Finance Considerations
 
 ## Look-Ahead Bias
 
@@ -846,7 +846,7 @@ Preprocessing must be fitted only on information available during training.
 
 ---
 
-# 🚀 30. Future Improvements
+#  30. Future Improvements
 
 Possible extensions include:
 
@@ -875,7 +875,7 @@ This explicitly balances return, risk, turnover, and drawdown.
 
 ---
 
-# 📐 31. Complete Mathematical Formulation
+#  31. Complete Mathematical Formulation
 
 The complete problem can be summarized as follows.
 
@@ -937,7 +937,7 @@ Thus, the project learns a **policy over portfolio allocations**, rather than si
 
 ---
 
-# 🛠️ 32. Technology Stack
+#  32. Technology Stack
 
 - Python
 - NumPy
@@ -950,7 +950,7 @@ Thus, the project learns a **policy over portfolio allocations**, rather than si
 
 ---
 
-# 📦 33. Installation
+#  33. Installation
 
 Clone the repository:
 
@@ -985,7 +985,7 @@ Dynamic_Asset_Allocation_using_Deep_Reinforcement_Learning.ipynb
 
 ---
 
-# 📁 34. Repository Structure
+#  34. Repository Structure
 
 ```text
 Dynamic_Asset_Allocation_using_Deep_Reinforcement_Learning/
@@ -997,7 +997,7 @@ Dynamic_Asset_Allocation_using_Deep_Reinforcement_Learning/
 
 ---
 
-# 🎓 35. Key Takeaway
+#  35. Key Takeaway
 
 The central idea is:
 
@@ -1023,13 +1023,13 @@ This turns portfolio management into a **continuous sequential optimization prob
 
 ---
 
-# ⚠️ Disclaimer
+#  Disclaimer
 
 This project is intended for **educational and research purposes only**. Historical backtest performance does not guarantee future returns. Real-world results depend on market conditions, execution costs, liquidity, taxes, data quality, model robustness, and risk management.
 
 ---
 
-# 👤 Author
+#  Author
 
 **Abhijit Solanki**
 
